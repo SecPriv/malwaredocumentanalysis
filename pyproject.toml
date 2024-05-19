@@ -1,0 +1,109 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools",
+    "wheel"
+]
+
+[project]
+dependencies = [
+    "numpy",
+    "pandas",
+    "seaborn",
+    "jupyter",  # to run jupyter notebooks.
+    "python-magic-bin",  # to detect file type of files.
+    "oletools[full]",  # to analyze rtf and office files.
+    "sympy",
+    "pydantic<2.0",  # to manage dataclasses.
+    "requests",  # to send api calls.
+    "python-dotenv",  # to load .env files
+    "ratelimit",  # to limit api calls.
+    "textract>=1.6.4",  # to extract text from files.
+    "pywin32",  # for windows metadata extraction.
+    "python-docx",  # to read word files
+    "python-docx-docm",  # to read word files with marcros files
+    "langdetect",  # to detect language
+    "pypdf[full]",  # read pdf documents
+    "filetype",  # for second opinion on file type.
+    "rarfile",  # for extraction of rar files.
+    "transformers~=4.27.1",  # to load huggingface models.
+    "langchain",  # to use llms in text analysis.
+    "llama_index==0.7.4",  # to index documents for llms.
+    "sentence_transformers",
+    "protobuf",
+    "cpm_kernels",  # for ChatGLM models
+    "pyarrow~=12.0.1",
+    "textsplit~=0.5",  # for splitting text into embeddings.
+    "ray[default]~=2.6.3",
+    "ray[tune]~=2.6.3",
+    "striprtf~=0.0.26"
+]
+description = "Clustering of malware documents."
+license = {text = "unspecified"}
+name = "malwaredoc"
+readme = "README.md"
+requires-python = ">=3.10"
+version = "0.0.1"
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit"
+]
+
+[tool.black]
+experimental-string-processing = true
+include = '\.pyi?$'
+line-length = 120
+target-version = ['py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib"
+]
+
+[tool.ruff]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv"
+]
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+ignore = ["E402"]
+# Same as Black.
+line-length = 120
+per-file-ignores = {}
+# Enable the pycodestyle (`E`) and Pyflakes (`F`) rules by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = ["E", "F"]
+# Assume Python 3.10.
+target-version = "py310"
+unfixable = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
